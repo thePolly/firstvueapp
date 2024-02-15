@@ -1,47 +1,63 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script >
+import PostForm from "@/components/PostForm.vue";
+import PostList from "@/components/PostList.vue";
+
+import { toHandlers } from 'vue';
+
+export default {
+  components: {
+    PostForm,
+    PostList
+  },
+  data(){
+    return {
+ posts: [
+  { id: 1, title: 'JavaScript', body: 'Text 1 text about javascript'},
+  { id: 2, title: 'Java', body: 'Text 1222 text about javascript'},
+  { id: 3, title: 'HTML', body: 'Text 1333 text about javascript'}
+]
+
+    }
+  },
+
+  methods:{
+    createPost(post) {
+        this.posts.push(post);
+    }
+
+  }
+}
+
 </script>
-
+//v-bind:posts == :posts
+//props should be modified before sending to child container
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+ <post-form
+ @create = "createPost"
+ />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+<post-list 
+:posts="posts"
 
-  <main>
-    <TheWelcome />
-  </main>
+/>
+
 </template>
 
+
+//scoped is used when we want styles to be applied only for current component 
 <style scoped>
-header {
-  line-height: 1.5;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.app{
+  padding: 20px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
+
 </style>

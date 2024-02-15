@@ -1,6 +1,14 @@
-import './assets/main.css'
+
 
 import { createApp } from 'vue'
 import App from './App.vue'
+//instead of importing and registrating every ui component in every other component
+import  components  from '@/components/UI'
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+components.forEach(component => {
+    app.component(component.name, component)
+});
+
+app.mount('#app')
