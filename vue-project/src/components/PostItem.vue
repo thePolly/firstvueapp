@@ -9,7 +9,9 @@
     </div>
     </div>
 
-   <div class = "post__btns">
+   <div class = "post__btns"
+   @click="$emit('remove', post)"
+   >
     <the-button> Delete </the-button>
    </div>
    </div>
