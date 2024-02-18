@@ -1,25 +1,20 @@
 <script >
 import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
-
-import { toHandlers } from 'vue';
+import axios from 'axios';
 
 export default {
+
   components: {
     PostForm,
     PostList
   },
+
   data(){
     return {
- posts: [
-  { id: 1, title: 'JavaScript', body: 'Text 1 text about javascript'},
-  { id: 2, title: 'Java', body: 'Text 1222 text about javascript'},
-  { id: 3, title: 'HTML', body: 'Text 1333 text about javascript'}
-],
-dialogVisible: false,
-
+      posts: [],
+      dialogVisible: false,
     }
-
   },
 
   methods:{
@@ -32,11 +27,24 @@ dialogVisible: false,
     },
     showPost(){
       this.dialogVisible=true;
-    }
+    },
+    async fetchPosts() {
+      try{
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        console.log(response);
+        this.posts = response.data;
 
+      } catch (e) {
+        alert('An error occurred during loading posts.');
+      }
+    }
+  },
+
+mounted: function() {
+    console.log('mounted');
+    this.fetchPosts();
   }
 }
-
 </script>
 
 
