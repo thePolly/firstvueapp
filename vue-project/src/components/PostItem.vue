@@ -1,8 +1,8 @@
 <template>
    <div class="post">
    <div>
-    <div>
-      <strong>Name:</strong> {{post.title}}
+    <div class="post__title">
+      {{post.title}}
     </div>
     <div>
       <strong>Desk:</strong> {{ post.body }}
@@ -33,11 +33,21 @@
 <style>
 
 .post {
+
   padding: 15px;
-  border: 2px solid pink;
-  margin-top: 15px;
+  border: 1px solid #b4b4b4;
+  background-color: rgb(250, 248, 249);
+  border-radius: 8px;
+  margin: 25px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.post__title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+
 }
 </style>

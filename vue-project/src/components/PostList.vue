@@ -30,6 +30,8 @@ import PostItem from "@/components/PostItem.vue";
 
 
 <style>
-
+h2{
+  text-align :center;
+}
 
 </style>
