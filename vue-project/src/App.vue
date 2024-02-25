@@ -15,6 +15,10 @@ export default {
       dialogVisible: false,
       arePostsLoading: false,
       selectedSort: '',
+      pageNumber: 1,
+      postNumber: 10,
+      totalPageNumber: 0,
+      searchQuery: '',
       sortOptions: [
         { value: "title", name: "By Title" },
         { value: "desc", name: "By Description" },
@@ -38,9 +42,16 @@ export default {
         this.arePostsLoading = true;
         setTimeout(async () => {
           const response = await axios.get(
-            "https://jsonplaceholder.typicode.com/posts?_limit=10"
+            "https://jsonplaceholder.typicode.com/posts", {
+            params: {
+              _page: this.pageNumber,
+              _limit: this.postNumber,
+              
+            }
+          }
           );
           console.log(response);
+          this.totalPageNumber = Math.ceil(response.headers['x-total-count'] / this._limit);
           this.posts = response.data;
           this.arePostsLoading = false;
         }, 1000);
@@ -67,6 +78,9 @@ export default {
         post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
       );
     },
+    sortedAndFilteredPosts() {
+      return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    }
   },
 };
 </script>
@@ -76,17 +90,17 @@ container
 <template>
   <div>
     <h1></h1>
-
+    <the-input v-model="searchQuery" placeholder = "..."/>
     <div class="control_container">
       <the-button @click="showPost"> Create Post </the-button>
-      <sorting-select v-show="false" v-model="selectedSort" :options="sortOptions" />
+      <sorting-select v-show="true" v-model="selectedSort" :options="sortOptions" />
     </div>
 
     <the-dialog v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </the-dialog>
 
-    <post-list :posts="posts" @remove="removePost" v-if="!arePostsLoading" />
+    <post-list :posts="sortedAndFilteredPosts" @remove="removePost" v-if="!arePostsLoading" />
     <div v-if="arePostsLoading">Loading...</div>
   </div>
 </template>
