@@ -1,8 +1,8 @@
 <template>
-  <select v-model="modelValue" @change="changeOption">
+  <select :value="modelValue" @change="changeOption">
     <option disabled value="">Choose</option>
     <option
-      v-for="option in options"
+      v-for="option in sortOptions"
       :key="option.value"
       :value="option.value"
     >
@@ -13,9 +13,14 @@
 
 <script>
 export default {
-  name: 'the-select',
-
-    options: {
+  name: 'sorting-select',
+  props: {
+    // Corrected the props definition
+    modelValue: {
+      type: String, // or the appropriate type for your use case
+      required: true
+    }},
+    sortOptions: {
       type: Array,
       default: () => []
     
@@ -29,5 +34,7 @@ export default {
 </script>
 
 <style scoped>
-
-</style>
+select {
+  width: 100px;
+}
+  </style>

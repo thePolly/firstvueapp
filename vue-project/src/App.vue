@@ -51,7 +51,8 @@ export default {
           }
           );
           console.log(response);
-          this.totalPageNumber = Math.ceil(response.headers['x-total-count'] / this._limit);
+          this.totalPageNumber = Math.ceil(response.headers['x-total-count'] / this.postNumber);
+          console.log(this.postNumber )
           this.posts = response.data;
           this.arePostsLoading = false;
         }, 1000);
@@ -93,12 +94,14 @@ container
     <the-input v-model="searchQuery" placeholder = "..."/>
     <div class="control_container">
       <the-button @click="showPost"> Create Post </the-button>
-      <sorting-select v-show="true" v-model="selectedSort" :options="sortOptions" />
+      <sorting-select v-model="selectedSort" :sortOptions="sortOptions" />
     </div>
 
     <the-dialog v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </the-dialog>
+
+<the-page :currentPage = "pageNumber" :total = "totalPageNumber"></the-page>
 
     <post-list :posts="sortedAndFilteredPosts" @remove="removePost" v-if="!arePostsLoading" />
     <div v-if="arePostsLoading">Loading...</div>
