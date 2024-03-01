@@ -37,6 +37,9 @@ export default {
     showPost() {
       this.dialogVisible = true;
     },
+    changePage(newPage) {
+      this.pageNumber = newPage;
+    },
     async fetchPosts() {
       try {
         this.arePostsLoading = true;
@@ -72,6 +75,9 @@ export default {
     dialogVisible(newOption) {
       console.log(newOption);
     },
+    pageNumber(newPage) {
+        this.fetchPosts();
+    }
   },
   computed: {
     sortedPosts() {
@@ -101,7 +107,7 @@ container
       <post-form @create="createPost" />
     </the-dialog>
 
-<the-page :currentPage = "pageNumber" :total = "totalPageNumber"></the-page>
+<the-page :currentPage = "pageNumber" @change = "changePage" :total = "totalPageNumber"></the-page>
 
     <post-list :posts="sortedAndFilteredPosts" @remove="removePost" v-if="!arePostsLoading" />
     <div v-if="arePostsLoading">Loading...</div>

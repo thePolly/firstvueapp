@@ -1,7 +1,9 @@
 <template>
 <div class="page__wrapper">
-    <div class= "page__btn" v-for="page in total"
-    :class="{'current-page': page === currentPage}"
+    <div class= "page__btn" 
+    v-for="page in total"
+    :class="{'current-page': page === currentPage }"
+    @click="changePage(page)"
     >
             {{ page  }}
     </div>
@@ -18,6 +20,11 @@ export default {
         },
         total: {
             type: Number,
+        }
+    },
+    methods: {
+        changePage(newPageNumber) {
+            this.$emit('change', newPageNumber);
         }
     }
 }
