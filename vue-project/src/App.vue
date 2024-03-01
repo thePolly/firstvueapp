@@ -107,10 +107,12 @@ container
       <post-form @create="createPost" />
     </the-dialog>
 
-<the-page :currentPage = "pageNumber" @change = "changePage" :total = "totalPageNumber"></the-page>
+
 
     <post-list :posts="sortedAndFilteredPosts" @remove="removePost" v-if="!arePostsLoading" />
     <div v-if="arePostsLoading">Loading...</div>
+
+    <the-page :currentPage = "pageNumber" @change = "changePage" :total = "totalPageNumber"></the-page>
   </div>
 </template>
 

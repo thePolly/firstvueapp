@@ -34,6 +34,7 @@ export default {
 <style scoped>
 .page__wrapper {
 display: flex;
+justify-content: center;
 
 }
 

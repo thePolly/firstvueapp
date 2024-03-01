@@ -1,5 +1,7 @@
 <template>
-  <input :value="modelValue" @input="updateInput" class="input" type="text" />
+  <div>
+  <input :value="modelValue" @input="updateInput" class="input" type="text" placeholder="Search" />
+</div>
 </template>
 
 <script>
@@ -18,9 +20,13 @@ export default {
 
 <style scoped>
 .input {
-  width: 100%;
+  margin:  20px 50px;
+  width: 300px;
   border: 1px solid plum;
-  padding: 5px 5px;
-  margin-top: 10px;
+  padding: 10px 10px;
+  border-radius: 5px;
+
 }
+
+
 </style>
