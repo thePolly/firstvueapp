@@ -58,7 +58,7 @@ export default {
           console.log(this.postNumber )
           this.posts = response.data;
           this.arePostsLoading = false;
-        }, 1000);
+        }, 0);
       } catch (e) {
         alert("An error occurred during loading posts.");
       } finally {
@@ -95,12 +95,12 @@ export default {
 //v-bind:posts == :posts //props should be modified before sending to child
 container
 <template>
-  <div>
+  <div class="main-container">
     <h1></h1>
     <the-input v-model="searchQuery" placeholder = "..."/>
     <div class="control_container">
       <the-button @click="showPost"> Create Post </the-button>
-      <sorting-select v-model="selectedSort" :sortOptions="sortOptions" />
+      <sorting-select v-show="false" v-model="selectedSort" :sortOptions="sortOptions" />
     </div>
 
     <the-dialog v-model:show="dialogVisible">
@@ -140,5 +140,9 @@ html {
   margin: 20px 50px;
   display: flex;
   justify-content: space-between;
+}
+
+.main-container{
+  margin: 40px;
 }
 </style>

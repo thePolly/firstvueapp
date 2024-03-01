@@ -2,7 +2,7 @@
 <div class="dialog" v-if = "show" @click="hideDialog">
 
     <div class = "dialog__content" @click.stop>
-        <h4>Create new Post</h4>
+        <h4>Create a new Post</h4>
 <slot>
 
 </slot>
@@ -55,6 +55,10 @@ export default {
     min-height: 60px;
     min-width: 340px;
     padding:20px;
+}
+
+h4 {
+    margin: 20px;
 }
 
 
